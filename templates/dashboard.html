@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<section style="margin-top: 100px;">
+    <h1>Dashboard {{ status }}</h1>
+    <h2>Selamat datang, {{ user.first_name }}</h2>
+
+    <div class="biodata">
+        <ul>
+            <li>Nama : {{pengunjung.user.first_name}} {{pengunjung.user.last_name}}</li>
+            <li>{{pengunjung.get_labelInstansi}} : {{pengunjung.instansi}}</li>
+            <li>{{pengunjung.get_labelAlamat}} : {{pengunjung.alamat}}</li>
+        </ul>
+    </div>
+
+    {% if status == 'Petugas' %}
+        <div class="card">
+            <h3>Menu Petugas</h3>
+
+            <ul>
+                <li>Scanner absensi</li>
+                <li>Jadwal hari ini</li>
+                <li>Laporan hadir : {{pengunjung.petugas.jumlahHadir}}</li>
+            </ul>
+        
+            <a href="{% url 'petugas.show_scanner' %}" class="btn btn-primary">
+                Buka Scanner
+            </a>
+</div>
+    {% elif status == 'Tamu' %}
+        <div class="card">
+        <h3>Menu Tamu</h3>
+            <p>Tujuan kunjungan: {{ pengunjung.pengunjungistimewa.tujuan }}</p>
+            <ul>
+                <li>Lihat status izin</li>
+            </ul>
+        </div>
+    {% else %}
+        <div class="card">
+            <h3>Menu Penghuni</h3>
+            <ul>
+                <li>Lihat kunjungan</li>
+                <li>Riwayat masuk</li>
+            </ul>
+        </div>
+    {% endif %}
+
+</section>
+{% endblock %}
