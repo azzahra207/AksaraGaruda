@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Probolinggo Sae</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome 5 for icons -->
+        <link rel="icon" type="image/svg" href="">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            min-height: 200vh;
+        }
+
+        /* ===== HEADER / NAVIGATION STYLES (from original with scroll effect) ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Transparent state (default) */
+        .header.header-transparent {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Solid white state (when scrolled) */
+        .header.header-solid {
+            background: #ffffff;
+            backdrop-filter: none;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* navigation core */
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem 0;
+            transition: padding 0.3s ease;
+        }
+
+        /* when scrolled, slightly reduce padding */
+        .header.header-solid .navigation {
+            padding: 0.625rem 0;
+        }
+
+        .nav-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: inline-block;
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        .nav-brand img {
+            height: 48px;
+            width: auto;
+            transition: all 0.2s ease;
+        }
+
+        /* logo slight shrink on scroll */
+        .header.header-solid .nav-brand img {
+            height: 44px;
+        }
+
+        /* desktop menu wrapper */
+        .nav-menus-wrapper {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Link colors based on header state */
+        .header.header-transparent .nav-menu > li > a {
+            color: #2d3e50;
+        }
+
+        .header.header-solid .nav-menu > li > a {
+            color: #1e2a3e;
+        }
+
+        .nav-menu li.active a {
+            color: #2b7a4b;
+            font-weight: 600;
+        }
+
+        .nav-menu li a:hover {
+            color: #2b7a4b;
+            transform: translateY(-1px);
+        }
+
+        /* align-to-right utility */
+        .align-to-right {
+            margin-left: auto;
+        }
+
+        /* login button style (alio_green) */
+        .alio_green {
+            background: transparent;
+            border: 1.5px solid #2c7a4d;
+            color: #2c7a4d !important;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.25s;
+        }
+
+        .alio_green:hover {
+            background: #2c7a4d;
+            color: white !important;
+            border-color: #2c7a4d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(44, 122, 77, 0.2);
+        }
+
+        /* solid state button variant */
+        .header.header-solid .alio_green {
+            border-color: #2c7a4d;
+            background: transparent;
+            color: #2c7a4d !important;
+        }
+
+        .header.header-solid .alio_green:hover {
+            background: #2c7a4d;
+            color: white !important;
+        }
+
+        /* mobile toggle button */
+        .nav-toggle {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 24px;
+            position: relative;
+            margin-left: 20px;
+        }
+
+        .nav-toggle:before,
+        .nav-toggle:after,
+        .nav-toggle span {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #2c7a4d;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-toggle:before {
+            top: 0;
+        }
+
+        .nav-toggle span {
+            top: 11px;
+        }
+
+        .nav-toggle:after {
+            bottom: 0;
+        }
+
+        /* solid state toggle color */
+        .header.header-solid .nav-toggle:before,
+        .header.header-solid .nav-toggle:after,
+        .header.header-solid .nav-toggle span {
+            background-color: #2c7a4d;
+        }
+
+        /* mobile menu overlay */
+        .nav-menus-wrapper-close-button {
+            display: none;
+        }
+
+        @media (max-width: 992px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menus-wrapper {
+                position: fixed;
+                top: 0;
+                right: -320px;
+                width: 300px;
+                height: 100vh;
+                background: white;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                padding: 80px 28px 30px;
+                transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                z-index: 1050;
+                overflow-y: auto;
+            }
+
+            .nav-menus-wrapper.open {
+                right: 0;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1.25rem;
+                width: 100%;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: left;
+            }
+
+            .nav-menu li a {
+                padding: 8px 0;
+                display: flex;
+                width: 100%;
+                font-size: 1.1rem;
+            }
+
+            .align-to-right {
+                margin-left: 0;
+                margin-top: 24px;
+                border-top: 1px solid #e9ecef;
+                padding-top: 24px;
+            }
+
+            .nav-menus-wrapper-close-button {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 26px;
+                cursor: pointer;
+                color: #2c7a4d;
+                font-weight: 300;
+                width: 36px;
+                height: 36px;
+                text-align: center;
+                line-height: 36px;
+                background: #f1f5f9;
+                border-radius: 50%;
+                transition: background 0.2s;
+            }
+
+            .nav-menus-wrapper-close-button:hover {
+                background: #e2e8f0;
+            }
+
+            /* adjust header logo for mobile */
+            .nav-brand img {
+                height: 42px;
+            }
+        }
+
+        /* ===== HERO SECTION TO DEMO SCROLL EFFECT ===== */
+        .hero-section {
+            height: 85vh;
+            min-height: 550px;
+            /* background: linear-gradient(135deg, #4aaf68 0%, #358d53 100%); */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* content sections */
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: #2c7a4d;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: #1e2a3e;
+        }
+
+        .card p {
+            color: #5a6e85;
+            line-height: 1.5;
+        }
+
+        .scroll-indicator {
+            text-align: center;
+            margin-top: 2rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .scroll-indicator i {
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-section {
+                min-height: 450px;
+            }
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header header-transparent" id="mainHeader">
+        <div class="container">
+            <nav id="navigation" class="navigation">
+                <div class="nav-header">
+                    <a class="nav-brand d-flex"  href="#">
+                        <img style="margin-right: 10px" src="img/logo.svg" alt="SmartKampung Logo">
+                        <img style="margin-right: 50px" src="img/logo-probsae.png" alt="SmartKampung Logo">
+                    </a>
+                    <div class="nav-toggle" id="navToggleBtn">
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="nav-menus-wrapper" id="navMenuWrapper">
+                    <span class="nav-menus-wrapper-close-button" id="closeMenuBtn">✕</span>
+                    <ul class="nav-menu">
+                        <li class="active"><a href="{% url 'home' %}"> <i class="fas fa-home"></i> Beranda</a></li>
+                        <li><a href="/kunjungan"><i class="fas fa-info-circle"></i>Kunjungan</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Wisata</a></li>
+                        <li><a href="#sejarah"><i class="fas fa-envelope"></i> Sejarah</a></li>
+                    </ul>
+                    
+                    <ul class="nav-menu align-to-right">
+
+                        {% if user.is_authenticated %}
+
+
+
+                            <li class="d-flex align-items-center gap-2">
+
+                            {% if user.pengunjung.foto %}
+
+                                
+                                <img 
+                                    src="{{ user.pengunjung.foto.url }}" 
+                                    alt="foto"
+                                    style="
+                                        width:40px;
+                                        height:40px;
+                                        border-radius:50%;
+                                        object-fit:cover;
+                                        border:2px solid #2c7a4d;
+                                    "
+                                >
+                            {% endif %}
+
+                            <span style="font-weight:600; color:#2c7a4d;">
+                                {{ user.first_name }} {{ user.last_name }}
+                            </span>
+                        
+                        </li>
+                    
+                        <li>
+                            <form method="POST" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="alio_green">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                    
+                        {% else %}
+                    
+                        <li>
+                            <a href="{% url 'login.options' %}" class="alio_green">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Masuk</span>
+                            </a>
+                        </li>
+                    
+                        {% endif %}
+                    
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- ========== END NAVIGATION ========= -->
+    <main class="py-0">
+            {% block content %}
+            {% endblock content %}
+    </main>
+    <!-- Hero section to showcase scroll effect (background changes on scroll) -->
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+        {% for message in messages %}
+            <script>
+                Swal.fire({
+                    icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
+                    title: '{{ message }}',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    timerProgressBar: true
+                });
+            </script>
+        {% endfor %}
+    {% endif %}
+
+    <script>
+        // =============================================================
+        // 1. SCROLL EFFECT: change header from transparent to solid white
+        // =============================================================
+        const header = document.getElementById('mainHeader');
+        const scrollThreshold = 50; // pixels scrolled to trigger change
+
+        function handleScroll() {
+            if (window.scrollY > scrollThreshold) {
+                // remove transparent class, add solid white class
+                header.classList.remove('header-transparent');
+                header.classList.add('header-solid');
+            } else {
+                // back to transparent style
+                header.classList.remove('header-solid');
+                header.classList.add('header-transparent');
+            }
+        }
+
+        // initial check
+        handleScroll();
+        // listen to scroll event
+        window.addEventListener('scroll', handleScroll);
+
+        // =============================================================
+        // 2. MOBILE NAVIGATION TOGGLE (fully functional)
+        // =============================================================
+        const navToggle = document.getElementById('navToggleBtn');
+        const navWrapper = document.getElementById('navMenuWrapper');
+        const closeBtn = document.getElementById('closeMenuBtn');
+
+        function openMobileNav() {
+            if (navWrapper) navWrapper.classList.add('open');
+            // prevent body scroll when menu is open (optional)
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            if (navWrapper) navWrapper.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        if (navToggle) {
+            navToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (navWrapper.classList.contains('open')) {
+                    closeMobileNav();
+                } else {
+                    openMobileNav();
+                }
+            });
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                closeMobileNav();
+            });
+        }
+
+        // close menu when clicking on any nav link (good UX)
+        const allNavLinks = document.querySelectorAll('.nav-menu a');
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 992) {
+                    closeMobileNav();
+                }
+            });
+        });
+
+        // on window resize: if screen > 992px, ensure menu is closed & reset overflow
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                if (navWrapper) navWrapper.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // =============================================================
+        // 3. LOGIN BUTTON DEMO (matches original modal behavior)
+        // =============================================================
+        const loginBtn = document.getElementById('loginButtonLama');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Simulate modal dialog (original smartkampung would show login modal)
+                alert('🔐 Form Login SmartKampung\n\nFungsi ini menampilkan modal login pada implementasi asli. Navigasi sudah sesuai dengan desain header transparan yang berubah menjadi putih saat di-scroll.');
+            });
+        }
+
+        // =============================================================
+        // 4. Additional polish: if there's any active state or logo links
+        //    just prevent default for demo smoothness (logo stays)
+        // =============================================================
+        const logoLinks = document.querySelectorAll('.nav-brand');
+        logoLinks.forEach(logo => {
+            logo.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // small console log to confirm scroll effect ready
+        console.log('SmartKampung Navigation: Transparent header → white on scroll (active)');
+    </script>
+</body>
+</html>
