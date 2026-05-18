@@ -1,16 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Probolinggo Sae</title>
+    <title>Perpustakaan | Aksara Garuda</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
     <!-- Font Awesome 5 for icons -->
-        <link rel="icon" type="image/svg" href="">
+        <link rel="icon" type="image/jpg" href="{% static 'img/logo-perpus.jpg' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
@@ -22,7 +24,29 @@
             box-sizing: border-box;
         }
 
+        @media (min-width: 993px) {
+    .dropdown-menu {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        z-index: 1060 !important;
+        display: none;
+        margin-top: 0.5rem;
+    }
+    
+    .dropdown:hover > .dropdown-menu,
+    .dropdown.show > .dropdown-menu {
+        display: block;
+    }
+    
+    .nav-item.dropdown {
+        position: relative;
+    }
+}
+
+
         body {
+            isolation: isolate;
             font-family: 'Inter', sans-serif;
             background: #f5f7fa;
             min-height: 200vh;
@@ -34,10 +58,20 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
+            z-index: 1030 !important;
             transition: all 0.3s ease-in-out;
         }
+        .nav-menu li {
+    overflow: visible !important;
+}
 
+        .dropdown-menu {
+            z-index: 1050 !important;
+            position: absolute !important;
+        }
+        .nav-item.dropdown {
+            position: relative;
+        }
         /* Transparent state (default) */
         .header.header-transparent {
             background: rgba(255, 255, 255, 0.25);
@@ -67,9 +101,10 @@
             justify-content: space-between;
             padding: 0.875rem 0;
             transition: padding 0.3s ease;
+           
         }
 
-        /* when scrolled, slightly reduce padding */
+        /* when scrolled, slightly rgba(255, 0, 0, 0.404)uce padding */
         .header.header-solid .navigation {
             padding: 0.625rem 0;
         }
@@ -111,6 +146,7 @@
             padding: 0;
             gap: 2rem;
             align-items: center;
+            position: relative;
         }
 
         .nav-menu li {
@@ -119,7 +155,7 @@
 
         .nav-menu li a {
             text-decoration: none;
-            font-weight: 500;
+            font-weight: bolder !important;
             font-size: 1rem;
             transition: all 0.2s ease;
             display: inline-flex;
@@ -129,20 +165,26 @@
 
         /* Link colors based on header state */
         .header.header-transparent .nav-menu > li > a {
-            color: #2d3e50;
+             color: #3e1e1e;
+        }
+        .header.header-transparent .nav-menu > li > a:hover {
+             color: rgb(235, 161, 24);
         }
 
         .header.header-solid .nav-menu > li > a {
-            color: #1e2a3e;
+            color: #3e1e1e;
+        }
+        .header.header-solid .nav-menu > li > a:hover {
+            color: rgb(185, 28, 28);
         }
 
         .nav-menu li.active a {
-            color: #2b7a4b;
+            color: #7a2b2b;
             font-weight: 600;
         }
 
         .nav-menu li a:hover {
-            color: #2b7a4b;
+            color: #7a2b2b;
             transform: translateY(-1px);
         }
 
@@ -154,8 +196,8 @@
         /* login button style (alio_green) */
         .alio_green {
             background: transparent;
-            border: 1.5px solid #2c7a4d;
-            color: #2c7a4d !important;
+            border: 1.5px solid rgba(255, 0, 0, 0.404);
+            color: rgba(255, 0, 0, 0.404) !important;
             padding: 8px 22px;
             border-radius: 40px;
             font-weight: 600;
@@ -163,22 +205,22 @@
         }
 
         .alio_green:hover {
-            background: #2c7a4d;
+            background: rgba(255, 0, 0, 0.404);
             color: white !important;
-            border-color: #2c7a4d;
+            border-color: rgba(255, 0, 0, 0.404);
             transform: translateY(-2px);
             box-shadow: 0 6px 14px rgba(44, 122, 77, 0.2);
         }
 
         /* solid state button variant */
         .header.header-solid .alio_green {
-            border-color: #2c7a4d;
+            border-color: rgba(255, 0, 0, 0.404);
             background: transparent;
-            color: #2c7a4d !important;
+            color: rgba(255, 0, 0, 0.404) !important;
         }
 
         .header.header-solid .alio_green:hover {
-            background: #2c7a4d;
+            background: rgba(255, 0, 0, 0.404);
             color: white !important;
         }
 
@@ -199,7 +241,7 @@
             position: absolute;
             width: 100%;
             height: 2px;
-            background-color: #2c7a4d;
+            background-color: rgba(255, 0, 0, 0.404);
             transition: all 0.3s;
             border-radius: 2px;
         }
@@ -220,7 +262,7 @@
         .header.header-solid .nav-toggle:before,
         .header.header-solid .nav-toggle:after,
         .header.header-solid .nav-toggle span {
-            background-color: #2c7a4d;
+            background-color: rgba(255, 0, 0, 0.404);
         }
 
         /* mobile menu overlay */
@@ -240,7 +282,7 @@
                 width: 300px;
                 height: 100vh;
                 background: white;
-                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15);
+                box-shadow: -20px 0 100px rgba(0, 0, 0, 0.15);
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: stretch;
@@ -287,7 +329,7 @@
                 right: 20px;
                 font-size: 26px;
                 cursor: pointer;
-                color: #2c7a4d;
+                color: rgba(255, 0, 0, 0.404);
                 font-weight: 300;
                 width: 36px;
                 height: 36px;
@@ -383,7 +425,7 @@
 
         .card i {
             font-size: 2.5rem;
-            color: #2c7a4d;
+            color: rgba(255, 0, 0, 0.404);
             margin-bottom: 1rem;
         }
 
@@ -405,6 +447,28 @@
             font-size: 0.9rem;
         }
 
+        @media (max-width: 992px) {
+    .dropdown-menu {
+        position: static !important;
+        float: none;
+        width: 100%;
+        background: #f8f9fa;
+        margin-top: 0.5rem;
+        border: none;
+        box-shadow: none;
+        padding-left: 1rem;
+        display: none;
+    }
+    
+    .dropdown-menu.show {
+        display: block;
+    }
+    
+    .nav-item.dropdown .dropdown-toggle::after {
+        float: right;
+        margin-top: 8px;
+    }
+}
         .scroll-indicator i {
             animation: bounce 1.5s infinite;
         }
@@ -425,6 +489,83 @@
                 padding: 2rem 1.5rem;
             }
         }
+
+
+        .tombol-hijau {
+    background: linear-gradient(150rad, #5a0606, rgb(177, 17, 17), #720e0e);
+    padding: 10px 20px !important;
+    color: white;
+    border: none;
+    text-decoration: none;
+    border-radius: 50px !important;
+    transform: scale(1) !important;
+    transition: 0.3s !important;
+}
+
+.tombol-hijau:hover {
+    background: linear-gradient(150rad, #ad2e2e, #7c0b0b, #b61e1e);
+    transform: scale(1.05) !important;
+    color:#fff
+}
+
+       @media (min-width: 993px) {
+    .nav-item.dropdown {
+        position: relative;
+    }
+    
+    .nav-item.dropdown .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 0; /* Hapus jarak */
+        transition: visibility 0.2s, opacity 0.2s;
+        opacity: 0;
+        visibility: hidden;
+        display: block !important; /* Override display none */
+        pointer-events: none; /* Awalnya tidak bisa diklik */
+    }
+    
+    /* Bridge untuk menghubungkan tombol dengan menu */
+    .nav-item.dropdown::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 15px;
+        background: transparent;
+    }
+    
+    /* Tampilkan dropdown saat hover pada tombol ATAU menu */
+    .nav-item.dropdown:hover .dropdown-menu,
+    .nav-item.dropdown .dropdown-menu:hover {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        margin-top: 0.5rem; /* Muncul dengan jarak sedikit */
+    }
+    
+    /* Pastikan menu tidak hilang saat hover */
+    .dropdown-menu {
+        z-index: 1100 !important;
+    }
+}
+
+#tombolMore{
+    width:100%;
+}
+#tombolMore > a{
+    color:#ff1e1e;
+    text-decoration: none;
+}
+#tombolMore>a:hover{
+    color: #b71212;
+    text-decoration: underline;
+}
+
+
+
+
     </style>
 </head>
 <body>
@@ -433,9 +574,9 @@
         <div class="container">
             <nav id="navigation" class="navigation">
                 <div class="nav-header">
-                    <a class="nav-brand d-flex"  href="#">
-                        <img style="margin-right: 10px" src="img/logo.svg" alt="SmartKampung Logo">
-                        <img style="margin-right: 50px" src="img/logo-probsae.png" alt="SmartKampung Logo">
+                    <a class="nav-brand d-flex"  href="{% url 'home' %}">
+                        <img style="margin-right: 10px" src="{% static 'img/logogabung.png' %}" alt="SmartKampung Logo">
+                        <img style="margin-right: 50px" src="{% static 'img/logo-perpus-removebg.png' %}" alt="SmartKampung Logo">
                     </a>
                     <div class="nav-toggle" id="navToggleBtn">
                         <span></span>
@@ -445,23 +586,99 @@
                 <div class="nav-menus-wrapper" id="navMenuWrapper">
                     <span class="nav-menus-wrapper-close-button" id="closeMenuBtn">✕</span>
                     <ul class="nav-menu">
-                        <li class="active"><a href="{% url 'home' %}"> <i class="fas fa-home"></i> Beranda</a></li>
-                        <li><a href="/kunjungan"><i class="fas fa-info-circle"></i>Kunjungan</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> Wisata</a></li>
-                        <li><a href="#sejarah"><i class="fas fa-envelope"></i> Sejarah</a></li>
+                        <li class="active">
+                            <a href="{% url 'home' %}">
+                                <i class="fas fa-home"></i> Beranda
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user"></i> Profil
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Struktur
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Galeri
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Tentang Kami
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'dashboard' %}">
+                                <i class="fas fa-gauge"></i> Dashboard
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-info-circle"></i> Kunjungan
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Jadwal Kunjungan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Tata Tertib
+                                    </a>
+                                </li>
+                                {% if user.is_authenticated %} 
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'kunjungan.index' %}">
+                                        Data Kunjungan
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-book"></i> Buku
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'buku.index' %}">
+                                        Daftar Buku
+                                    </a>
+                                </li>  
+                                 {% if user.is_authenticated %} 
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'buku.show.scanner' %}">
+                                        Pinjam / Kembalikan Buku
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Riwayat Peminjaman
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    
                     </ul>
                     
                     <ul class="nav-menu align-to-right">
 
                         {% if user.is_authenticated %}
-
-
-
                             <li class="d-flex align-items-center gap-2">
-
-                            {% if user.pengunjung.foto %}
-
-                                
+                            {% if user.pengunjung.foto %}                               
                                 <img 
                                     src="{{ user.pengunjung.foto.url }}" 
                                     alt="foto"
@@ -470,15 +687,13 @@
                                         height:40px;
                                         border-radius:50%;
                                         object-fit:cover;
-                                        border:2px solid #2c7a4d;
+                                        border:2px solid rgba(255, 0, 0, 0.404);
                                     "
                                 >
                             {% endif %}
-
-                            <span style="font-weight:600; color:#2c7a4d;">
+                            <span style="font-weight:600; color:rgba(255, 0, 0, 0.404);">
                                 {{ user.first_name }} {{ user.last_name }}
                             </span>
-                        
                         </li>
                     
                         <li>
@@ -492,16 +707,13 @@
                         </li>
                     
                         {% else %}
-                    
                         <li>
                             <a href="{% url 'login.options' %}" class="alio_green">
                                 <i class="fas fa-sign-in-alt"></i>
                                 <span>Masuk</span>
                             </a>
                         </li>
-                    
                         {% endif %}
-                    
                     </ul>
                 </div>
             </nav>
@@ -514,12 +726,15 @@
     </main>
     <!-- Hero section to showcase scroll effect (background changes on scroll) -->
     
+</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     {% if messages %}
         {% for message in messages %}
             <script>
+                AOS.init();
                 Swal.fire({
                     icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
                     title: '{{ message }}',
@@ -619,21 +834,55 @@
                 alert('🔐 Form Login SmartKampung\n\nFungsi ini menampilkan modal login pada implementasi asli. Navigasi sudah sesuai dengan desain header transparan yang berubah menjadi putih saat di-scroll.');
             });
         }
-
-        // =============================================================
-        // 4. Additional polish: if there's any active state or logo links
-        //    just prevent default for demo smoothness (logo stays)
-        // =============================================================
-        const logoLinks = document.querySelectorAll('.nav-brand');
-        logoLinks.forEach(logo => {
-            logo.addEventListener('click', (e) => {
+document.addEventListener('DOMContentLoaded', function() {
+    // Inisialisasi ulang dropdown Bootstrap
+    var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+    var dropdownList = dropdownElementList.map(function(dropdownToggleEl) {
+        return new bootstrap.Dropdown(dropdownToggleEl, {
+            popperConfig: function(defaultBsPopperConfig) {
+                return {
+                    ...defaultBsPopperConfig,
+                    placement: 'bottom-start'
+                };
+            }
+        });
+    });
+    
+    // Fallback untuk mobile: handle klik manual
+    if (window.innerWidth <= 992) {
+        document.querySelectorAll('.nav-item.dropdown > .dropdown-toggle').forEach(function(toggle) {
+            toggle.addEventListener('click', function(e) {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                e.stopPropagation();
+                
+                var parentLi = this.closest('.nav-item.dropdown');
+                var dropdownMenu = parentLi.querySelector('.dropdown-menu');
+                
+                // Tutup semua dropdown lain
+                document.querySelectorAll('.nav-item.dropdown .dropdown-menu.show').forEach(function(menu) {
+                    if (menu !== dropdownMenu) {
+                        menu.classList.remove('show');
+                    }
+                });
+                
+                // Toggle current
+                dropdownMenu.classList.toggle('show');
             });
         });
-
-        // small console log to confirm scroll effect ready
+    }
+    
+    // Tutup dropdown saat klik di luar (untuk mobile)
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 992) {
+            if (!e.target.closest('.nav-item.dropdown')) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(function(menu) {
+                    menu.classList.remove('show');
+                });
+            }
+        }
+    });
+});
+        
         console.log('SmartKampung Navigation: Transparent header → white on scroll (active)');
     </script>
-</body>
 </html>
