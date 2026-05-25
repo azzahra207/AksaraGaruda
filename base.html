@@ -1,0 +1,593 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMN Surabaya</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+
+        html{
+            scroll-behavior: smooth;
+        }
+
+        body{
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+
+            background: radial-gradient(
+                circle at center,
+                #7a0000 0%,
+                #3a0000 55%,
+                #140000 100%
+            );
+        }
+
+        /*HERO VIDEO*/
+        .hero-video-container{
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .video-bg{
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 85%;
+            height: 80%;
+
+            transform: translate(-50%, -50%);
+
+            object-fit: cover;
+
+            border-radius: 25px;
+
+            z-index: 1;
+
+            filter:
+                brightness(0.95)
+                contrast(1.05)
+                saturate(1.1);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .overlay{
+            position: absolute;
+            inset: 0;
+
+            background: rgba(120,0,0,0.10);
+
+            z-index: 2;
+        }
+
+        /*NAVBAR*/
+        .navbar{
+            position: fixed;
+
+            top: 15px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 78%;
+            height: 58px;
+
+            background: linear-gradient(
+                135deg,
+                #7a0000,
+                #b30000
+            );
+
+            border-radius: 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 30px;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 12px 25px rgba(0,0,0,0.35),
+                0 0 18px rgba(179,0,0,0.35);
+
+            backdrop-filter: blur(8px);
+        }
+
+        .navbar a,
+        .navbar span{
+            color: white;
+            text-decoration: none;
+
+            margin: 0 10px;
+
+            transition: 0.3s ease;
+        }
+
+        .navbar a{
+            padding: 7px 14px;
+            border-radius: 12px;
+        }
+
+        .navbar a:hover{
+            background: rgba(255,255,255,0.1);
+
+            transform: translateY(-2px);
+
+            color: #ffdede;
+        }
+
+        /*HERO*/
+        .hero{
+            position: relative;
+            z-index: 3;
+
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            color: white;
+
+            padding: 20px;
+        }
+
+        .hero-title{
+            font-size: 85px;
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 15px;
+
+            color: white;
+
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.2),
+                0 0 30px rgba(255,0,0,0.35),
+                0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .hero-subtitle{
+            max-width: 750px;
+
+            font-size: 20px;
+
+            line-height: 1.8;
+
+            color: rgba(255,255,255,0.88);
+
+            margin-top: 20px;
+        }
+
+        .hero-badge{
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(8px);
+
+            padding: 10px 22px;
+
+            border-radius: 50px;
+
+            margin-bottom: 25px;
+
+            font-size: 14px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            color: rgba(255,255,255,0.9);
+
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .hero-line{
+            width: 140px;
+            height: 4px;
+
+            border-radius: 50px;
+
+            background: linear-gradient(
+                90deg,
+                #ff0000,
+                #ffffff,
+                #ff0000
+            );
+
+            margin-top: 10px;
+        }
+
+        .hero-btn{
+            margin-top: 35px;
+
+            background: linear-gradient(
+                135deg,
+                #b30000,
+                #ff1a1a
+            );
+
+            color: white;
+
+            padding: 15px 35px;
+
+            border-radius: 50px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s ease;
+
+            box-shadow:
+                0 10px 25px rgba(179,0,0,0.4);
+        }
+
+        .hero-btn:hover{
+            transform: translateY(-4px) scale(1.03);
+
+            box-shadow:
+                0 15px 35px rgba(255,0,0,0.45);
+        }
+
+        main{
+            position: relative;
+            z-index: 5;
+        }
+
+        /*GLASS CARD */
+        .glass-card{
+            background: rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            border-radius: 35px;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.35);
+        }
+
+        /* ANIMATION= */
+        .fade-in{
+            opacity: 0;
+
+            transform: translateY(40px);
+
+            transition:
+                opacity 1s ease,
+                transform 1s ease;
+        }
+
+        .fade-in.show{
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /*--footer--*/
+        .footer-section{
+            position: relative;
+
+            margin-top: 120px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #240012,
+                    #7a0000,
+                    #3a0000
+                );
+
+            color: white;
+
+            overflow: hidden;
+        }
+
+        .footer-wave svg{
+            display: block;
+            width: 100%;
+            height: 100px;
+        }
+
+        .footer-container{
+            max-width: 1300px;
+
+            margin: auto;
+
+            padding:
+                40px
+                30px
+                70px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr
+                1fr
+                1fr;
+
+            gap: 70px;
+        }
+
+        .footer-logo{
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .footer-logo-img{
+            width: 80px;
+            height: 80px;
+
+            object-fit: contain;
+
+            border-radius: 50%;
+
+            background: white;
+
+            padding: 6px;
+
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.35);
+        }
+
+        .footer-desc{
+            line-height: 1.9;
+            color: rgba(255,255,255,0.82);
+            margin-bottom: 30px;
+        }
+
+        .footer-social{
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a{
+            width: 52px;
+            height: 52px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 20px;
+
+            transition: 0.3s ease;
+        }
+
+        .footer-social a:nth-child(1){
+            background: black;
+        }
+
+        .footer-social a:nth-child(2){
+            background: #e1306c;
+        }
+
+        .footer-social a:nth-child(3){
+            background: #ff0000;
+        }
+
+        .footer-social a:nth-child(4){
+            background: #25d366;
+        }
+
+        .footer-social a:hover{
+            transform: translateY(-5px);
+        }
+
+        .footer-links{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-links h3,
+        .footer-contact h3{
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .footer-links a{
+            color: rgba(255,255,255,0.85);
+
+            text-decoration: none;
+
+            margin-bottom: 18px;
+
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover{
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .contact-item{
+            display: flex;
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon{
+            width: 55px;
+            height: 55px;
+
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+
+            flex-shrink: 0;
+        }
+
+        .contact-icon.red{
+            background: #ff2a2a;
+        }
+
+        .contact-icon.green{
+            background: #16c45b;
+        }
+
+        @media(max-width:900px){
+
+            .footer-container{
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title{
+                font-size: 50px;
+            }
+
+            .navbar{
+                width: 92%;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div>
+
+            <a href="/">
+                <i class="fas fa-home"></i> Home
+            </a>
+
+            <a href="#about">
+                <i class="fas fa-circle-info"></i> About
+            </a>
+
+            <a href="#visi">
+                <i class="fas fa-bullseye"></i> Visi Misi
+            </a>
+
+        </div>
+
+        <div>
+
+            {% if user.is_authenticated %}
+
+                <span>
+                    <i class="fas fa-user-circle"></i>
+                    {{ user.first_name }}
+                </span>
+
+            {% else %}
+
+                <a href="{% url 'login.options' %}">
+                    Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-video-container">
+
+        <video autoplay muted loop class="video-bg">
+            <source src="{% static 'video/dashboard_aksara_garuda.mp4' %}" type="video/mp4">
+        </video>
+
+        <div class="overlay"></div>
+
+        <section class="hero fade-in">
+
+            <div class="hero-badge">
+                Smart Digital Campus
+            </div>
+
+            <h1 class="hero-title">
+                AMN Surabaya
+            </h1>
+
+            <div class="hero-line"></div>
+
+            <p class="hero-subtitle">
+                Membangun generasi muda yang unggul,
+                berkarakter, berprestasi,
+                dan siap menjadi pemimpin masa depan bangsa.
+            </p>
+
+            <a href="#about" class="hero-btn">
+                Jelajahi Sekarang
+            </a>
+
+        </section>
+
+    </section>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- ANIMATION -->
+    <script>
+
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach((entry) => {
+
+                if(entry.isIntersecting){
+                    entry.target.classList.add('show');
+                }
+
+            });
+
+        }, {
+            threshold: 0.15
+        });
+
+        fadeElements.forEach((el) => observer.observe(el));
+
+    </script>
+
+</body>
+</html>

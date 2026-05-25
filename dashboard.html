@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- ABOUT -->
+<section id="about"
+class="max-w-6xl mx-auto
+       glass-card
+       text-white
+       p-12
+       mt-[200px]
+       mb-20
+       fade-in">
+
+    <div class="text-center">
+
+        <h2 class="text-5xl font-bold mb-6">
+            Tentang AMN Surabaya
+        </h2>
+
+        <p class="text-white/80 text-lg leading-relaxed max-w-4xl mx-auto">
+            Asrama Mahasiswa Nusantara Surabaya merupakan tempat pembinaan
+            mahasiswa unggul yang berkarakter, berprestasi,
+            serta siap menjadi pemimpin masa depan bangsa.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- VISI MISI -->
+<section id="visi"
+class="max-w-5xl mx-auto
+       glass-card
+       text-white
+       p-14
+       text-center
+       mb-20
+       fade-in">
+
+    <div class="text-5xl mb-5">
+        <i class="fas fa-graduation-cap"></i>
+    </div>
+
+    <h2 class="text-4xl font-bold mb-6">
+        Visi & Misi AMN
+    </h2>
+
+    <p class="text-white/80 text-lg leading-relaxed">
+        Mengenal visi dan misi Asrama Mahasiswa Nusantara Surabaya
+        dalam membentuk generasi unggul yang berkarakter,
+        berprestasi, dan siap memimpin masa depan bangsa.
+    </p>
+
+</section>
+
+<!--- CARD -->
+<section class="max-w-6xl mx-auto mb-24 fade-in">
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+        <div class="glass-card text-white p-8 rounded-[30px]">
+
+            <div class="text-4xl mb-4">
+                <i class="fas fa-user-shield"></i>
+            </div>
+
+            <h3 class="text-2xl font-bold mb-3">
+                Karakter
+            </h3>
+
+            <p class="text-white/80">
+                Membentuk mahasiswa yang disiplin,
+                berintegritas, dan memiliki jiwa nasionalisme tinggi.
+            </p>
+
+        </div>
+
+        <div class="glass-card text-white p-8 rounded-[30px]">
+
+            <div class="text-4xl mb-4">
+                <i class="fas fa-trophy"></i>
+            </div>
+
+            <h3 class="text-2xl font-bold mb-3">
+                Prestasi
+            </h3>
+
+            <p class="text-white/80">
+                Mendukung pengembangan akademik
+                dan non-akademik mahasiswa.
+            </p>
+
+        </div>
+
+        <div class="glass-card text-white p-8 rounded-[30px]">
+
+            <div class="text-4xl mb-4">
+                <i class="fas fa-users"></i>
+            </div>
+
+            <h3 class="text-2xl font-bold mb-3">
+                Kepemimpinan
+            </h3>
+
+            <p class="text-white/80">
+                Menyiapkan generasi muda
+                yang siap memimpin masa depan bangsa.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-section fade-in">
+
+    <div class="footer-wave">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path fill="#ffffff"
+                d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,58.7C1120,64,1280,96,1360,112L1440,128L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z">
+            </path>
+        </svg>
+    </div>
+
+    <div class="footer-container">
+
+        <div>
+
+            <div class="footer-logo">
+
+                <img src="{% static 'img/logoamn.png' %}"
+                     alt="Logo AMN"
+                     class="footer-logo-img">
+
+                <div>
+                    <h2 class="text-3xl font-bold">
+                        AMN Surabaya
+                    </h2>
+
+                    <p class="text-white/70">
+                        Asrama Mahasiswa Nusantara Surabaya
+                    </p>
+                </div>
+
+            </div>
+
+            <p class="footer-desc">
+                Merupakan Program Beasiswa yang berasal dari Kementerian
+                Pendidikan Tinggi, Sains dan Teknologi yang menaungi
+                mahasiswa dari berbagai perguruan tinggi di Surabaya.
+            </p>
+
+            <div class="footer-social">
+
+                <a href="#">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fab fa-youtube"></i>
+                </a>
+
+                <a href="#">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-links">
+
+            <h3>Tautan Cepat</h3>
+
+            <a href="#">Home</a>
+            <a href="#visi">Visi & Misi</a>
+            <a href="#">Fasilitas</a>
+            <a href="#">Berita</a>
+            <a href="#">Prestasi</a>
+
+        </div>
+
+        <div class="footer-contact">
+
+            <h3>Kontak</h3>
+
+            <div class="contact-item">
+
+                <div class="contact-icon red">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+
+                <p>
+                    Jalan Jemur Andayani No.1 Surabaya
+                </p>
+
+            </div>
+
+            <div class="contact-item">
+
+                <div class="contact-icon green">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+
+                <p>
+                    +62 821-4266-7945
+                </p>
+
+            </div>
+
+            <div class="contact-item">
+
+                <div class="contact-icon red">
+                    <i class="fas fa-envelope"></i>
+                </div>
+
+                <p>
+                    amn@upnjatim.ac.id
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+{% endblock %}
